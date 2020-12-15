@@ -1,5 +1,5 @@
 resources:
-- ingress.yaml
+- route.yaml
 bases:
 - ../../base
 patchesStrategicMerge:
