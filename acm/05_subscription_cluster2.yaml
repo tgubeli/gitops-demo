@@ -1,0 +1,16 @@
+apiVersion: apps.open-cluster-management.io/v1
+kind: Subscription
+metadata:
+  name: apache-cluster2                          
+  namespace: simple-app
+  labels:
+    name: httpd
+  annotations:
+    apps.open-cluster-management.io/github-branch: master
+    apps.open-cluster-management.io/github-path: assets/overlays/cluster2
+spec:
+  channel:  simple-app/federation
+  placement: 
+    placementRef: 
+      kind: PlacementRule
+      name: apache-cluster2

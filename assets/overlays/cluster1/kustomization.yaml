@@ -1,0 +1,6 @@
+resources:
+- route.yaml
+bases:
+- ../../base
+patchesStrategicMerge:
+- deployment.yaml 
