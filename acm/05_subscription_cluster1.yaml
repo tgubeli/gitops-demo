@@ -6,7 +6,7 @@ metadata:
   labels:
     name: httpd
   annotations:
-    apps.open-cluster-management.io/github-branch: master
+    apps.open-cluster-management.io/github-branch: main
     apps.open-cluster-management.io/github-path: assets/overlays/cluster1
 spec:
   channel:  simple-app/federation
