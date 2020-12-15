@@ -1,9 +1,30 @@
 # gitops-demo
 GitOps with Red Hat ACM
 
-# Deploying and Managing a Project with GitOps
+## Configure OpenShift client context for cluster admin access
 
-Now that we have the clusters defined, let’s deploy a project which includes a service, namespace, and deployment.
+You should have three OCP managed cluster and one OCP hub cluster
+
+~~~sh
+# Login into hub cluster
+oc login -u admin -p XXXX --insecure-skip-tls-verify https://api.YOURACMCLUSTER.DOMAIN:6443
+# Set the name of the context
+oc config rename-context $(oc config current-context) hubcluster
+# Login into 1st cluster (A environment)
+oc login -u admin -p XXXX --insecure-skip-tls-verify https://api.YOURCLUSTER1.DOMAIN:6443
+# Set the name of the context
+oc config rename-context $(oc config current-context) cluster1
+# Login into 2nd cluster (B environment)
+oc login -u admin -p XXXX --insecure-skip-tls-verify https://api.YOURCLUSTER2.DOMAIN:6443
+# Set the name of the context
+oc config rename-context $(oc config current-context) cluster2
+# Login into 3rd cluster (C environment)
+oc login -u admin -p XXXX --insecure-skip-tls-verify https://api.YOURCLUSTER3.DOMAIN:6443
+# Set the name of the context
+oc config rename-context $(oc config current-context) cluster3
+~~~
+
+# Deploying and Managing a Project with GitOps
 
 This lab will use cluster1, cluster2 and cluster3. The first step is to ensure that no resources currently exist in the *simple-app* namespace.
 ~~~sh
@@ -26,28 +47,6 @@ The simple application includes the following resources:
 The [assets](./assets) contains definitions to deploy these resources.
 For example: the [simple Apache deployment template](./assets/deployment.yaml)
 
-0- Configure OpenShift client context for cluster admin access
-
-You should have three OCP managed cluster and one OCP hub cluster
-
-~~~sh
-# Login into hub cluster
-oc login -u admin -p XXXX --insecure-skip-tls-verify https://api.YOURACMCLUSTER.DOMAIN:6443
-# Set the name of the context
-oc config rename-context $(oc config current-context) hubcluster
-# Login into 1st cluster (A environment)
-oc login -u admin -p XXXX --insecure-skip-tls-verify https://api.YOURCLUSTER1.DOMAIN:6443
-# Set the name of the context
-oc config rename-context $(oc config current-context) cluster1
-# Login into 2nd cluster (B environment)
-oc login -u admin -p XXXX --insecure-skip-tls-verify https://api.YOURCLUSTER2.DOMAIN:6443
-# Set the name of the context
-oc config rename-context $(oc config current-context) cluster2
-# Login into 3rd cluster (C environment)
-oc login -u admin -p XXXX --insecure-skip-tls-verify https://api.YOURCLUSTER3.DOMAIN:6443
-# Set the name of the context
-oc config rename-context $(oc config current-context) cluster3
-~~~
 
 1- Change the directory acm
 ~~~sh
