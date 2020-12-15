@@ -23,13 +23,35 @@ The simple application includes the following resources:
 -   A [Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) of Apache web server.
 -   A [Service](https://kubernetes.io/docs/concepts/services-networking/service/).
 
-The [lab-4-assets](./lab-4-assets) contains definitions to deploy these resources.
-For example: the [simple Apache deployment template](./lab-4-assets/deployment.yaml)
+The [assets](./assets) contains definitions to deploy these resources.
+For example: the [simple Apache deployment template](./assets/deployment.yaml)
 
+0- Configure OpenShift client context for cluster admin access
 
-1- Change the directory lab-4-acm
+You should have three OCP managed cluster and one OCP hub cluster
+
 ~~~sh
-cd rhacmgitopslab/lab-4-acm/
+# Login into hub cluster
+oc login -u admin -p XXXX --insecure-skip-tls-verify https://api.YOURACMCLUSTER.DOMAIN:6443
+# Set the name of the context
+oc config rename-context $(oc config current-context) hubcluster
+# Login into 1st cluster (A environment)
+oc login -u admin -p XXXX --insecure-skip-tls-verify https://api.YOURCLUSTER1.DOMAIN:6443
+# Set the name of the context
+oc config rename-context $(oc config current-context) cluster1
+# Login into 2nd cluster (B environment)
+oc login -u admin -p XXXX --insecure-skip-tls-verify https://api.YOURCLUSTER2.DOMAIN:6443
+# Set the name of the context
+oc config rename-context $(oc config current-context) cluster2
+# Login into 3rd cluster (C environment)
+oc login -u admin -p XXXX --insecure-skip-tls-verify https://api.YOURCLUSTER3.DOMAIN:6443
+# Set the name of the context
+oc config rename-context $(oc config current-context) cluster3
+~~~
+
+1- Change the directory acm
+~~~sh
+cd acm
 ~~~
 
 2- Ensure to load the "hubcluster" context
@@ -54,12 +76,16 @@ oc create -f 03_application.yaml
 
 6- Create placementrule for putting application just on Openshift cluster1
 ~~~sh
-oc create -f 04_placementrule_cluster1only.yaml
+oc create -f 04_placement_cluster1.yaml
+oc create -f 04_placement_cluster2.yaml
+oc create -f 04_placement_cluster3.yaml
 ~~~
 
 7- Create subscription
 ~~~sh
-oc create -f 05_subscription.yaml
+oc create -f 05_subscription_cluster1.yaml
+oc create -f 05_subscription_cluster2.yaml
+oc create -f 05_subscription_cluster3.yaml
 ~~~
 
 
