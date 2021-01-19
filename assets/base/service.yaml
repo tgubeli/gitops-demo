@@ -3,15 +3,15 @@ kind: Service
 metadata:
   creationTimestamp: null
   labels:
-    app: httpd
-  name: httpd
+    app: book-import
+  name: book-import
   namespace: simple-app
 spec:
   ports:
-  - port: 8080
+  - port: 80
     protocol: TCP
     targetPort: 8080
   selector:
-    app: httpd
+    app: book-import
   sessionAffinity: None
   type: ClusterIP
