@@ -16,7 +16,8 @@ spec:
         app: httpd
     spec:
       containers:
-      - image: rhscl/httpd-24-rhel7 
-        name: httpd
+      - image: quay.io/jpacker/hugo-nginx:latest
+        name: book-import
         ports:
         - containerPort: 8080
+          name: http-server
