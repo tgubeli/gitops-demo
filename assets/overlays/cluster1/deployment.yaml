@@ -6,4 +6,4 @@ metadata:
   name: book-import
   namespace: simple-app
 spec:
-  replicas: 2
+  replicas: 1
