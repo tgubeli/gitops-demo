@@ -1,0 +1,17 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: book-import
+  namespace: simple-app
+spec:
+  port:
+    targetPort: 8080
+  to:
+    kind: Service
+    name: book-import
+    weight: 100
+status:
+  ingress:
+  - conditions:
+    - status: "True"
+      type: Admitted
