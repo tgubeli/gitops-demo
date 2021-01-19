@@ -2,8 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    name: httpd
-  name: httpd
+    name: book-import
+  name: book-import
   namespace: simple-app
 spec:
   replicas: 1
